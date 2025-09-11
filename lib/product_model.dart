@@ -72,15 +72,15 @@ final List<ProductModel> products = [
       "assets/images/monitors/m(2)5.jpg",
     ],
   ),
-  ProductModel(
-    name: "Smart Ambient Lighting Corner LED Stand",
-    price: "\$91.99",
-    images: [
-      "assets/images/ambient_lighting/a1.png",
-      "assets/images/ambient_lighting/a2.png",
-      "assets/images/ambient_lighting/a3.png",
-      "assets/images/ambient_lighting/a4.png",
-      "assets/images/ambient_lighting/a5.png",
-    ],
-  ),
+  // ProductModel(
+  //   name: "Smart Ambient Lighting Corner LED Stand",
+  //   price: "\$91.99",
+  //   images: [
+  //     "assets/images/ambient_lighting/a1.png",
+  //     "assets/images/ambient_lighting/a2.png",
+  //     "assets/images/ambient_lighting/a3.png",
+  //     "assets/images/ambient_lighting/a4.png",
+  //     "assets/images/ambient_lighting/a5.png",
+  //   ],
+  // ),
 ];
