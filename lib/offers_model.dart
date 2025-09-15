@@ -1,3 +1,6 @@
+import 'package:flutter/widgets.dart';
+import 'package:sprints_shopping_app/l10n/app_localizations.dart';
+
 class OffersModel {
   final String title;
   final String subtitle;
@@ -9,30 +12,34 @@ class OffersModel {
   });
 }
 
-final List<OffersModel> Offers = [
-  OffersModel(
-    title: "50% off \nElectronics",
-    textbutton: "50% OFF",
-    subtitle: "Limited time offer \non all tech \ngadgets",
-  ),
-  OffersModel(
-    title: "Free \nShipping\nWeekend",
-    textbutton: "FREE SHIP",
-    subtitle: "No delivery \ncharges on \norders above \$50",
-  ),
-  OffersModel(
-    title: "Buy 2 Get 1 Free",
-    textbutton: "B2G1",
-    subtitle: "On selected \naccessories and \nperipherals",
-  ),
-  OffersModel(
-    title: "Student \nDiscount",
-    textbutton: "20% OFF",
-    subtitle: "Extra 20% off with \nvalid student ID",
-  ),
-  OffersModel(
-    title: "Bundle Deals",
-    textbutton: "BUNDLE",
-    subtitle: "Save more when\nyou buy complete \nsetups",
-  ),
-];
+List<OffersModel> getOffers(BuildContext context) {
+  final loc = AppLocalizations.of(context)!;
+
+  return [
+    OffersModel(
+      title: loc.offer1Title,
+      subtitle: loc.offer1Subtitle,
+      textbutton: loc.offer1Button,
+    ),
+    OffersModel(
+      title: loc.offer2Title,
+      subtitle: loc.offer2Subtitle,
+      textbutton: loc.offer2Button,
+    ),
+    OffersModel(
+      title: loc.offer3Title,
+      subtitle: loc.offer3Subtitle,
+      textbutton: loc.offer3Button,
+    ),
+    OffersModel(
+      title: loc.offer4Title,
+      subtitle: loc.offer4Subtitle,
+      textbutton: loc.offer4Button,
+    ),
+    OffersModel(
+      title: loc.offer5Title,
+      subtitle: loc.offer5Subtitle,
+      textbutton: loc.offer5Button,
+    ),
+  ];
+}

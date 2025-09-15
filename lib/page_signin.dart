@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sprints_shopping_app/l10n/app_localizations.dart';
 import 'package:sprints_shopping_app/main_shopping_screen.dart';
 
 class SignInPage extends StatefulWidget {
   final String email;
   final String password;
-
-  const SignInPage({super.key, required this.email, required this.password});
+  final void Function(Locale) onChangeLanguage;
+  const SignInPage({
+    super.key,
+    required this.email,
+    required this.password,
+    required this.onChangeLanguage,
+  });
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -22,6 +28,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   bool _isPasswordVisible = true;
+
   @override
   Widget build(BuildContext context) {
     final screenheight = MediaQuery.of(context).size.height;
@@ -61,7 +68,7 @@ class _SignInPageState extends State<SignInPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Sign in",
+                    AppLocalizations.of(context)!.signIn,
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w600,
@@ -71,7 +78,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Welcome Back",
+                    AppLocalizations.of(context)!.text13,
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -128,16 +135,22 @@ class _SignInPageState extends State<SignInPage> {
                                 child: TextFormField(
                                   controller: emailController,
                                   decoration: InputDecoration(
-                                    hintText: "  Email or Phone number",
+                                    hintText: AppLocalizations.of(
+                                      context,
+                                    )!.text5,
                                     hintStyle: TextStyle(color: Colors.grey),
                                     border: InputBorder.none,
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Email is required ";
+                                      return AppLocalizations.of(
+                                        context,
+                                      )!.text14;
                                     }
                                     if (value != widget.email) {
-                                      return "Incorrect password ";
+                                      return AppLocalizations.of(
+                                        context,
+                                      )!.text15;
                                     }
                                     return null;
                                   },
@@ -148,7 +161,9 @@ class _SignInPageState extends State<SignInPage> {
                                 child: TextFormField(
                                   obscureText: !_isPasswordVisible,
                                   decoration: InputDecoration(
-                                    hintText: "  Password",
+                                    hintText: AppLocalizations.of(
+                                      context,
+                                    )!.password,
                                     hintStyle: TextStyle(color: Colors.grey),
                                     border: InputBorder.none,
                                     suffixIcon: IconButton(
@@ -167,10 +182,14 @@ class _SignInPageState extends State<SignInPage> {
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Password is required ";
+                                      return AppLocalizations.of(
+                                        context,
+                                      )!.text12;
                                     }
                                     if (value != widget.password) {
-                                      return "Incorrect password ";
+                                      return AppLocalizations.of(
+                                        context,
+                                      )!.text15;
                                     }
                                     return null;
                                   },
@@ -182,7 +201,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       SizedBox(height: screenheight * 0.055),
                       Text(
-                        "Forgot password",
+                        AppLocalizations.of(context)!.text16,
                         style: TextStyle(color: Colors.grey),
                       ),
                       SizedBox(height: screenheight * 0.055),
@@ -197,20 +216,24 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Account sign-in successfully"),
+                                SnackBar(
+                                  content: Text(
+                                    AppLocalizations.of(context)!.text17,
+                                  ),
                                 ),
                               );
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => MainShoppingScreen(),
+                                  builder: (context) => MainShoppingScreen(
+                                    onChangeLanguage: widget.onChangeLanguage,
+                                  ),
                                 ),
                               );
                             }
                           },
                           child: Center(
                             child: Text(
-                              "Sign in",
+                              AppLocalizations.of(context)!.signIn,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,

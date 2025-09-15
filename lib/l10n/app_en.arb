@@ -1,0 +1,58 @@
+{
+  "@@locale": "en",
+  "appTitle": "ShopCraft",
+  "subtitle":"Your Premium Shopping",
+  "subtitle1":"Experience",
+  "signIn": "Sign In",
+  "signup": "Sign Up",
+    "email": "Email",
+"text1": "Create Account",
+"text2": "Join ShopCraft today",
+"text3": "  Enter your name",
+"text4": "Please enter your name",
+"text5": "  Enter your email",
+"text6": "Enter a valid email",
+"text7": "  Enter your password",
+"text8": "Please enter your email",
+"text9": "  Confirm your password",
+"text10": "User saved ",
+"text11": "Create Account",
+"text12": "Password is required",
+"text13": "Welcome Back",
+"text14": "Email is required ",
+"text15": "Incorrect password ",
+
+"text16": "Forgot password",
+"text17": "Account sign-in successfully",
+"text18": "Our Products",
+"text19": "Featured Products",
+"text20": "Shop Our Collection",
+"text21": "Hot Offers 🔥",
+"text22":"Must start with a uppercase",
+
+"textPremiumLaptop": "Premium Laptop Collection",
+  "textWorkspace": "Professional Workspace",
+  "textLighting": "Ambient Lighting",
+"offer1Title": "50% off \nElectronics",
+  "offer1Subtitle": "Limited time offer \non all tech \ngadgets",
+  "offer1Button": "50% OFF",
+
+  "offer2Title": "Free \nShipping\nWeekend",
+  "offer2Subtitle": "No delivery \ncharges on \norders above  $50",
+  "offer2Button": "FREE SHIP",
+
+  "offer3Title": "Buy 2 Get 1 Free",
+  "offer3Subtitle": "On selected \naccessories and \nperipherals",
+  "offer3Button": "B2G1",
+
+  "offer4Title": "Student \nDiscount",
+  "offer4Subtitle": "Extra 20% off with \nvalid student ID",
+  "offer4Button": "20% OFF",
+
+  "offer5Title": "Bundle Deals",
+  "offer5Subtitle": "Save more when\nyou buy complete \nsetups",
+  "offer5Button": "BUNDLE",
+"toastItemAdded": "Item added to cart",
+  "password": "  Password"
+  
+}

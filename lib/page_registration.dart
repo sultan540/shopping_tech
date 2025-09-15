@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sprints_shopping_app/l10n/app_localizations.dart';
 import 'package:sprints_shopping_app/page_signin.dart';
 import 'package:sprints_shopping_app/page_signup.dart';
 
 class PageRegistration extends StatefulWidget {
-  const PageRegistration({super.key});
+  final void Function(Locale) onChangeLanguage;
+  const PageRegistration({super.key, required this.onChangeLanguage});
 
   @override
   State<PageRegistration> createState() => _PageRegistrationState();
@@ -55,9 +57,20 @@ class _PageRegistrationState extends State<PageRegistration> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  ElevatedButton(
+                    onPressed: () =>
+                        widget.onChangeLanguage(const Locale('en')),
+                    child: const Text("English"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () =>
+                        widget.onChangeLanguage(const Locale('ar')),
+                    child: const Text("العربية"),
+                  ),
                   SizedBox(height: MediaQuery.of(context).padding.top),
+
                   Text(
-                    "ShopCraft",
+                    AppLocalizations.of(context)!.appTitle,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 60,
@@ -66,11 +79,11 @@ class _PageRegistrationState extends State<PageRegistration> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Your Premium Shopping",
+                    AppLocalizations.of(context)!.subtitle,
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   Text(
-                    "Experience",
+                    AppLocalizations.of(context)!.subtitle1,
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
 
@@ -145,11 +158,15 @@ class _PageRegistrationState extends State<PageRegistration> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (ctx) => SignUpPage()),
+                              MaterialPageRoute(
+                                builder: (ctx) => SignUpPage(
+                                  onChangeLanguage: widget.onChangeLanguage,
+                                ),
+                              ),
                             );
                           },
                           child: Text(
-                            "Sign Up",
+                            AppLocalizations.of(context)!.signup,
                             style: TextStyle(fontSize: 25),
                           ),
                         ),
@@ -170,16 +187,22 @@ class _PageRegistrationState extends State<PageRegistration> {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  SignInPage(email: "", password: ""),
+                              builder: (context) => SignInPage(
+                                email: "",
+                                password: "",
+                                onChangeLanguage: widget.onChangeLanguage,
+                              ),
                             ),
                           );
                         },
-                        child: Text("sign In", style: TextStyle(fontSize: 26)),
+                        child: Text(
+                          AppLocalizations.of(context)!.signIn,
+                          style: TextStyle(fontSize: 26),
+                        ),
                       ),
                     ),
                   ),
-
+                  // Text(AppLocalizations.of(context)!.login),
                   SizedBox(height: MediaQuery.of(context).padding.bottom),
                 ],
               ),

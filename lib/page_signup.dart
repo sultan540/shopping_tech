@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sprints_shopping_app/cubit_password.dart';
+import 'package:sprints_shopping_app/l10n/app_localizations.dart';
 import 'package:sprints_shopping_app/page_signin.dart';
 
 //String? savedEmail;
@@ -8,7 +9,9 @@ import 'package:sprints_shopping_app/page_signin.dart';
 String? saveName;
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({super.key, required this.onChangeLanguage});
+
+  final void Function(Locale) onChangeLanguage;
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -74,7 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Create Account",
+                            AppLocalizations.of(context)!.text1,
                             style: TextStyle(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               fontSize: 37,
@@ -88,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Join ShopCraft today",
+                            AppLocalizations.of(context)!.text2,
                             style: TextStyle(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               fontSize: 20,
@@ -149,12 +152,22 @@ class _SignUpPageState extends State<SignUpPage> {
                                           controller: nameController,
                                           decoration: InputDecoration(
                                             border: InputBorder.none,
-                                            labelText: "  Enter your name",
+                                            labelText: AppLocalizations.of(
+                                              context,
+                                            )!.text3,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return "Please enter your name";
+                                              return AppLocalizations.of(
+                                                context,
+                                              )!.text4;
+                                            }
+                                            if (value[0] !=
+                                                value[0].toUpperCase()) {
+                                              return AppLocalizations.of(
+                                                context,
+                                              )!.text22;
                                             }
                                             return null;
                                           },
@@ -174,15 +187,21 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           decoration: InputDecoration(
                                             border: InputBorder.none,
-                                            labelText: "  Enter your email",
+                                            labelText: AppLocalizations.of(
+                                              context,
+                                            )!.text5,
                                           ),
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return "Please enter your email";
+                                              return AppLocalizations.of(
+                                                context,
+                                              )!.text8;
                                             }
                                             if (!(value.contains("@"))) {
-                                              return "Enter a valid email";
+                                              return AppLocalizations.of(
+                                                context,
+                                              )!.text6;
                                             }
                                             return null;
                                           },
@@ -208,7 +227,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   decoration: InputDecoration(
                                                     border: InputBorder.none,
                                                     labelText:
-                                                        "  Enter your password",
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.text7,
 
                                                     suffixIcon: IconButton(
                                                       icon: Icon(
@@ -228,13 +249,15 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   validator: (value) {
                                                     if (value == null ||
                                                         value.isEmpty) {
-                                                      return "";
+                                                      return AppLocalizations.of(
+                                                        context,
+                                                      )!.text12;
                                                     }
                                                     // if (value.length < 8) {
                                                     //   return "Password must be at least 6 characters";
                                                     // }
                                                     if (!RegExp(
-                                                      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
+                                                      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$',
                                                     ).hasMatch(value)) {
                                                       return "";
                                                     }
@@ -298,7 +321,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     ),
                                                     border: InputBorder.none,
                                                     labelText:
-                                                        "  Confirm your password",
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.text9,
                                                   ),
                                                   validator: (value) {
                                                     if (value !=
@@ -355,7 +380,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                             ).showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  "تم حفظ المستخدم",
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.text10,
                                                 ),
                                               ),
                                             );
@@ -367,6 +394,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   email: emailController.text,
                                                   password:
                                                       passwordController.text,
+                                                  onChangeLanguage:
+                                                      widget.onChangeLanguage,
                                                 ),
                                               ),
                                             );
@@ -391,7 +420,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              "Create Account",
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.text11,
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20,

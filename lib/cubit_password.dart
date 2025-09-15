@@ -22,7 +22,7 @@ class CubitPassword extends Cubit<Passwordstate> {
       );
 
   void validatePassword(String password) {
-    final regex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
+    final regex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$');
     if (password.isEmpty) {
       emit(
         Passwordstate(
@@ -36,7 +36,7 @@ class CubitPassword extends Cubit<Passwordstate> {
         Passwordstate(
           isvalid: false,
           messagePassword:
-              "The password must contain letters and numbers and be at least 8 characters long.",
+              "The password must contain letters and numbers and be at least 6 characters long.",
           messageConfirmPassword: "",
         ),
       );

@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:sprints_shopping_app/l10n/app_localizations.dart';
 import 'package:sprints_shopping_app/offers_model.dart';
 import 'package:sprints_shopping_app/pageView_provider.dart';
 import 'package:sprints_shopping_app/product_model.dart';
 
 class MainShoppingScreen extends StatefulWidget {
-  const MainShoppingScreen({super.key});
+  final void Function(Locale) onChangeLanguage;
+  const MainShoppingScreen({super.key, required this.onChangeLanguage});
 
   @override
   State<MainShoppingScreen> createState() => _MainShoppingScreenState();
 }
 
 class _MainShoppingScreenState extends State<MainShoppingScreen> {
-  void showTopToast() {
-    Fluttertoast.showToast(
-      msg: " Item added to cart",
+  void _changeLocale(Locale locale) => widget.onChangeLanguage(locale);
+  void showTopToast(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
 
+    Fluttertoast.showToast(
+      msg: loc.toastItemAdded, // النص المترجم
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       backgroundColor: const Color.fromARGB(255, 129, 128, 128),
-      textColor: const Color.fromARGB(255, 255, 255, 255),
+      textColor: Colors.white,
       fontSize: 20,
     );
   }
@@ -33,13 +37,15 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
     "assets/images/ambient.png",
   ];
 
-  final List<String> text = [
-    "Premium Laptop Collection",
-    "Professional Workspace",
-    "Ambient Lighting",
-  ];
+  List<String> get localizedTexts {
+    final loc = AppLocalizations.of(context)!;
+    return [loc.textPremiumLaptop, loc.textWorkspace, loc.textLighting];
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Offers = getOffers(context);
+    final loc = AppLocalizations.of(context)!;
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -52,6 +58,28 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
     double screenheight = MediaQuery.of(context).size.height;
     double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      // appBar: AppBar(actions: [
+      //     PopupMenuButton<String>(
+      //       onSelected: (value) {
+      //         if (value == 'en') {
+      //           widget.onChangeLanguage(const Locale('en'));
+      //         } else if (value == 'ar') {
+      //           widget.onChangeLanguage(const Locale('ar'));
+      //         }
+      //       },
+      //       itemBuilder: (context) => const [
+      //         PopupMenuItem(
+      //           value: 'en',
+      //           child: Text('English'),
+      //         ),
+      //         PopupMenuItem(
+      //           value: 'ar',
+      //           child: Text('العربية'),
+      //         ),
+      //       ],
+      //       icon: const Icon(Icons.language),
+      //     ),
+      //   ],),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -60,7 +88,7 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
                 padding: EdgeInsets.only(
                   top: MediaQuery.of(context).padding.top,
                 ),
-                height: 130,
+                height: 170,
                 width: screenwidth,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -69,20 +97,39 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
                     end: Alignment.bottomRight,
                   ),
                 ),
-                child: Center(
-                  child: Text(
-                    "Our Products",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PopupMenuButton<String>(
+                      icon: const Icon(Icons.language, size: 36),
+                      onSelected: (value) {
+                        if (value == 'en') {
+                          _changeLocale(const Locale('en'));
+                        } else if (value == 'ar') {
+                          _changeLocale(const Locale('ar'));
+                        }
+                      },
+                      itemBuilder: (context) => const [
+                        PopupMenuItem(value: 'en', child: Text('English')),
+                        PopupMenuItem(value: 'ar', child: Text('العربية')),
+                      ],
                     ),
-                  ),
+                    Center(
+                      child: Text(
+                        loc.text18,
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: screenheight * 0.02),
               Text(
-                "Featured Products",
+                loc.text19,
                 style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
               ),
 
@@ -114,7 +161,7 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
                         child: Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            "${text[index]}",
+                            "${localizedTexts[index]}",
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -153,7 +200,7 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
               ),
               SizedBox(height: screenheight * 0.03),
               Text(
-                "Shop Our Collection",
+                loc.text20,
                 style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: screenheight * 0.025),
@@ -222,7 +269,7 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
                                   child: Center(
                                     child: IconButton(
                                       onPressed: () {
-                                        showTopToast();
+                                        showTopToast(context);
                                       },
                                       icon: Icon(
                                         Icons.shopping_cart,
@@ -270,7 +317,7 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Hot Offers 🔥",
+                    loc.text21,
                     style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -312,7 +359,7 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
                             Text(
                               offer.title,
                               style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 21,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -330,7 +377,7 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
                         Spacer(),
                         Container(
                           height: 60,
-                          width: 140,
+                          width: 110,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40),
                             gradient: LinearGradient(
@@ -346,7 +393,7 @@ class _MainShoppingScreenState extends State<MainShoppingScreen> {
                             child: Text(
                               offer.textbutton,
                               style: TextStyle(
-                                fontSize: 23,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: const Color.fromARGB(255, 255, 255, 255),
                               ),
